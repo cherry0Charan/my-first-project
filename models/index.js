@@ -1,20 +1,14 @@
-const dbConfig=require("../config/dbconfig");
+require('dotenv').config()
 
 const {Sequelize,DataTypes}=require("sequelize");
 
-const sequelize=new Sequelize(dbConfig.DB,dbConfig.USER,dbConfig.PASSWORD,
+const sequelize=new Sequelize(process.env.DB_DATA,process.env.DB_USER,process.env.DB_PASSWORD,
     {
-        host:dbConfig.HOST,
-        dialect:dbConfig.dialect
+        host:process.env.DB_HOST,
+        dialect:process.env.DB_dialect
     })
 
-sequelize.authenticate()
-.then((result)=>{
-    console.log(result);
-})
-.catch((err)=>{
-    console.log(err);
-})
+
 
 let db={};
 
@@ -22,11 +16,11 @@ db.Sequelize=Sequelize;
 db.sequelize=sequelize;
 
 db.product=require("./productModels")(sequelize,DataTypes);
-db.reviews=require("./reviewModel")(sequelize,DataTypes);
+db.user=require("./userModel")(sequelize,DataTypes);
 
 db.sequelize
 .sync({force:true})
 .then(()=>{
-    console.log("reacreate")  
+      
 })
 module.exports=db;

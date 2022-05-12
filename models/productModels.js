@@ -19,6 +19,10 @@ module.exports=(sequelize,DataTypes)=>{
         published:{
             type:DataTypes.BOOLEAN
         }
+    },{
+        freezeTableName: true,
+        timestamps: false
     })
     return Product
 }
+

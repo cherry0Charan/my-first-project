@@ -14,9 +14,9 @@ app.use(express.urlencoded({extended:true}));
 
 
 //routing
-const router=require("./routes/productRoute.js");
+const router=require("./routes/routing");
 
-app.use("/api/products",router)
+app.use("/api",router)
 
 
 app.get("/",(req,res)=>{
